@@ -1,11 +1,12 @@
 <template>
-    <div class="w-full max-w-[340px]">
-        <div ref="selectButton" class="w-full border py-2 px-3 bg-white" @click="handleClick" :class="{'!rounded-t-lg': dialogVisible, 'rounded-md': !dialogVisible}">
+    <div class="ui-select w-full max-w-[340px]">
+        <div ref="selectButton" class="w-full relative border py-2 px-3 pr-9 bg-white hover:bg-gray-50 cursor-pointer transition-all" @click="handleClick" :class="buttonStateStyles">
           <div class="text-gray-400" v-if="!currentValue">{{ placeholder }}</div>
           <div class="text-black" v-else>{{ buttonLabel }}</div>
+          <IconChevron class="absolute" :class="chevronStateStyle" />
         </div>
         <teleport to='body'>
-            <div v-show="dialogVisible" class="fixed py-2 px-3 bg-white border rounded-b-lg" ref="selectList">
+            <div v-show="showDropdown" class="ui-select__list fixed bg-white border rounded-b-lg" ref="selectList">
                 <slot />
             </div>
         </teleport>
@@ -16,6 +17,7 @@
 import {
   ref, onMounted, onBeforeUnmount, getCurrentInstance, watch, computed,
 } from 'vue';
+import IconChevron from '../icons/icon-chevron.vue';
 
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
@@ -27,9 +29,11 @@ const currentValue = ref(null);
 const buttonLabel = computed(() => currentValue.value?.id || currentValue.value?.label);
 const instance = getCurrentInstance();
 const emits = defineEmits(['update:modelValue']);
-const dialogVisible = ref(false);
+const showDropdown = ref(false);
 const selectList = ref(null);
 const selectButton = ref(null);
+const buttonStateStyles = computed(() => (showDropdown.value ? 'rounded-t-lg' : 'rounded-lg'));
+const chevronStateStyle = computed(() => (showDropdown.value ? 'top-4 right-4 rotate-180' : 'top-4 right-4'));
 
 const listElement = () => selectList.value;
 const buttonElement = () => selectButton.value;
@@ -82,7 +86,7 @@ const listBind = () => {
 };
 
 const handleClick = () => {
-  dialogVisible.value = !dialogVisible.value;
+  showDropdown.value = !showDropdown.value;
 
   listBind();
 };
@@ -90,6 +94,7 @@ const handleClick = () => {
 // eslint-disable-next-line no-unused-vars
 const updateValue = ({ value }) => {
   emits('update:modelValue', value);
+  showDropdown.value = !showDropdown.value;
 };
 
 watch(
@@ -113,5 +118,4 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

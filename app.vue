@@ -54,9 +54,8 @@
         </div>
       </UiDialog>
     </div>
-    <h2 class="mb-3 text-3xl mt-5 font-bold">Dialog</h2>
+    <h2 class="mb-3 text-3xl mt-5 font-bold">Select</h2>
     <div class="flex items-center w-full justify-center">
-      {{ selectValue }}
       <UiSelect v-model="selectValue">
         <template #default>
           <UiSelectOption v-for="(option, index) in options" :value="option.id" :label="option.label" :key="index" />
@@ -84,6 +83,14 @@ const options = [
   {
     label: 'Test',
     id: 'test',
+  },
+  {
+    label: 'Test1',
+    id: 'test1',
+  },
+  {
+    label: 'Test2',
+    id: 'test2',
   },
 ];
 

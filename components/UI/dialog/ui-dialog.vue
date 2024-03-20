@@ -22,7 +22,7 @@ import { computed } from 'vue';
 const props = defineProps({
   visible: { type: Boolean, default: () => false },
   title: { type: String, default: () => '' },
-  size: { type: String, default: () => '' }, // Size like width in tailwind
+  size: { type: String, default: () => 'w-7/12' }, // Size like width in tailwind
 });
 
 const formatedSize = computed(() => `lg:${props.size}`);
