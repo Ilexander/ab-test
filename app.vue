@@ -54,6 +54,15 @@
         </div>
       </UiDialog>
     </div>
+    <h2 class="mb-3 text-3xl mt-5 font-bold">Dialog</h2>
+    <div class="flex items-center w-full justify-center">
+      {{ selectValue }}
+      <UiSelect v-model="selectValue">
+        <template #default>
+          <UiSelectOption v-for="(option, index) in options" :value="option.id" :label="option.label" :key="index" />
+        </template>
+      </UiSelect>
+    </div>
   </div>
 </template>
 
@@ -64,9 +73,19 @@ import UiDialog from './components/UI/dialog/ui-dialog.vue';
 import IconGooglePay from './components/UI/icons/icon-google-pay.vue';
 import IconPaypal from './components/UI/icons/icon-paypal.vue';
 import UiInput from './components/UI/input/ui-input.vue';
+import UiSelect from './components/UI/select/ui-select.vue';
+import UiSelectOption from './components/UI/select/components/option/ui-select-option.vue';
 
-const value = defineModel({ default: 0 });
+const value = ref('');
 const dialogVisible = ref(false);
+const selectValue = ref('');
+
+const options = [
+  {
+    label: 'Test',
+    id: 'test',
+  },
+];
 
 const handleClick = () => {
   dialogVisible.value = !dialogVisible.value;
