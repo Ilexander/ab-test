@@ -1,10 +1,10 @@
 <template>
     <teleport to="body">
         <Transition name="fade">
-        <div v-if="visible" class=" vsTailwind ui-dialog__wrapper">
+        <div v-if="visible" class=" vsTailwind ui-dialog__wrapper z-30">
         <div class="ui-dialog w-full h-full fixed top-0 start-0 z-[80] bg-black bg-opacity-50">
             <transition name="content" appear>
-            <div class="ui-dialog__modal opacity-1 transition-all flex flex-col bg-white border shadow-sm rounded-xl w-11/12" :class="formatedSize">
+            <div class="ui-dialog__modal opacity-1 transition-all flex flex-col bg-white border shadow-sm rounded-xl w-11/12 lg:w-[400px]" :class="formatedSize">
                 <div class="ui-dialog__content p-4">
                     <slot />
                 </div>
@@ -25,7 +25,7 @@ const props = defineProps({
   size: { type: String, default: () => 'w-7/12' }, // Size like width in tailwind
 });
 
-const formatedSize = computed(() => `lg:${props.size}`);
+const formatedSize = computed(() => `!lg:${props.size}`);
 
 </script>
 
@@ -33,7 +33,6 @@ const formatedSize = computed(() => `lg:${props.size}`);
 
   .ui-dialog {
     &__wrapper {
-      z-index: 10001;
       position: relative;
     }
 

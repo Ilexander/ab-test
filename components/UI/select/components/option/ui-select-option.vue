@@ -6,7 +6,7 @@
 
 <script setup>
 import {
-  getCurrentInstance, computed, onMounted,
+  getCurrentInstance, computed,
 } from 'vue';
 import IconCheck from '~/components/UI/icons/icon-check.vue';
 
@@ -18,21 +18,14 @@ const props = defineProps({
 const selectInstance = getCurrentInstance().parent;
 const optionTitle = computed(() => props?.label || props.value);
 const optionValue = computed(() => props?.value || props.label);
-
 const selectValue = computed(() => selectInstance.props.modelValue);
-
 const isOptionActive = computed(() => optionValue.value === selectValue.value);
-
 const activeStateStyles = computed(() => (isOptionActive.value ? 'bg-futura-500 text-white pointer-events-none' : ''));
-
-onMounted(() => {
-  // console.log(selectInstance);
-});
 
 const handleClick = () => {
   const { updateValue } = selectInstance.devtoolsRawSetupState;
 
-  updateValue(optionValue);
+  updateValue(optionValue.value);
 };
 
 </script>

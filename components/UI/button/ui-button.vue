@@ -1,5 +1,5 @@
 <template>
-    <button class="py-[13px] max-h-[52px] px-8 border rounded-md transition-all active:opacity-80" :class="buttonStyles">
+    <button class="py-[13px] max-h-[52px] px-8 border rounded-xl transition-all active:opacity-80" :class="buttonStyles">
       <slot>{{ title }}</slot>
     </button>
 </template>

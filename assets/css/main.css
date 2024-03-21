@@ -29,6 +29,13 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'Proxima Nova';
+	src: url('../fonts/ProximaNova-Extrabld.woff') format('woff');
+	font-weight: 900;
+	font-style: normal;
+}
+
 body {
     font-family: 'Proxima Nova';
 }
