@@ -1,12 +1,15 @@
 <template>
-    <button class="py-[13px] max-h-[52px] px-8 border rounded-xl transition-all active:opacity-80" :class="buttonStyles">
+    <button class="py-[13px] max-h-[52px] px-8 border rounded-xl transition-all active:opacity-80" :class="[buttonStyles, disabledStyle]">
       <slot>{{ title }}</slot>
     </button>
 </template>
 
 <script setup>
+import { computed } from 'vue';
+
 const props = defineProps({
   title: String,
+  disabled: { type: Boolean, default: () => false },
   bgColor: { type: String, default: () => 'black' },
   borderColor: { type: String, default: (val) => (val?.bgColor || 'black') },
   textColor: { type: String, default: () => 'white' },
@@ -39,6 +42,8 @@ const activeEffectStyles = `active:bg-${props.activeEffect.bgColor} active:borde
 
 // All styles
 const buttonStyles = [defaultStyle, hoverEffectStyles, activeEffectStyles];
+
+const disabledStyle = computed(() => (props.disabled ? 'pointer-events-none opacity-50' : ''));
 
 </script>
 

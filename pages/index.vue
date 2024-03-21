@@ -75,7 +75,7 @@
               <div class="h-[1px] absolute z-1 top-2 bg-gray-300 w-full"></div>
               <div class="text-center z-2 relative text-gray-400 font-semibold w-fit mx-auto px-2 text-[12px] bg-white">OR</div>
             </div>
-            <UiInput class="w-full mb-9" v-model="value" label="Card number" placeholder="••••  ••••  ••••  ••••" mask="0000 0000 0000 0000"/>
+            <UiInput class="w-full mb-9" v-model="cardNumber" :validation="validateCard" label="Card number" placeholder="••••  ••••  ••••  ••••" mask="0000 0000 0000 0000"/>
             <div class="flex items-center mb-5">
                 <UiSelect v-model="selectedMonth" class="mr-2" label="Month" placeholder="December">
                     <template #default>
@@ -87,9 +87,9 @@
                         <UiSelectOption v-for="(option, index) in years" :label="option.label" :key="index" />
                     </template>
                 </UiSelect>
-                <UiInput v-model="cvcCode" label="cvc" placeholder="•••" mask="000"/>
+                <UiInput v-model="cvcCode" :validation="validateCvc" label="cvc" placeholder="•••" mask="000"/>
             </div>
-            <UiButton @click="handleClick" class="max-w-[273px] w-full font-bold" title="Submit" bgColor="gray-400" textColor="white"></UiButton>
+            <UiButton @click="handleClick" class="max-w-[273px] w-full font-bold" title="Submit" bgColor="gray-400" textColor="white" :disabled="formDataNotValue"></UiButton>
             <UiButton @click="handleClick" class="max-w-[273px] w-full font-bold" title="Close" bgColor="white" textColor="gray-400"
             :hoverEffect="{bgColor: 'white', borderColor: 'white', textColor: 'gray-500'}"
             :activeEffect="{bgColor: 'white', borderColor: 'white', textColor: 'gray-300'}"></UiButton>
@@ -99,7 +99,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import IconAsteroid from '../components/UI/icons/icon-asteroid.vue';
 import IconLockClosed from '../components/UI/icons/icon-lock-closed.vue';
 import IconStar from '../components/UI/icons/icon-star.vue';
@@ -179,6 +179,7 @@ const years = [
 ];
 
 const cvcCode = ref('');
+const cardNumber = ref('');
 const selectedMonth = ref('');
 const selectedYear = ref('');
 
@@ -187,6 +188,22 @@ const dialogVisible = ref(false);
 const handleClick = () => {
   dialogVisible.value = !dialogVisible.value;
 };
+
+const validateCvc = () => {
+  const { value } = cvcCode;
+
+  if (value.length !== 3) return false;
+  return true;
+};
+
+const validateCard = () => {
+  const { value } = cardNumber;
+
+  if (value.length !== 20) return false;
+  return true;
+};
+
+const formDataNotValue = computed(() => !validateCvc() || !validateCard());
 
 </script>
 
