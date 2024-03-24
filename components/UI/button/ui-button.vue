@@ -6,20 +6,17 @@
 
 <script setup>
 import { computed } from 'vue';
+import style from './style';
 
 const props = defineProps({
   title: String,
   disabled: { type: Boolean, default: () => false },
-  bgColor: { type: String, default: () => 'black' },
-  borderColor: { type: String, default: (val) => (val?.bgColor || 'black') },
-  textColor: { type: String, default: () => 'white' },
+  bgColor: { type: String, default: () => style.bgColor },
+  borderColor: { type: String, default: (val) => (val?.bgColor || style.borderColor) },
+  textColor: { type: String, default: () => style.textColor },
   hoverEffect: {
     type: Object,
-    default: (val) => ({
-      bgColor: 'futura-500',
-      borderColor: val?.hoverEffect?.bgColor || 'futura-500',
-      textColor: 'white',
-    }),
+    default: (val) => style.hoverEffect(val),
   },
   activeEffect: {
     type: Object,
