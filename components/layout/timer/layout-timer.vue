@@ -1,7 +1,6 @@
 <template>
-    <div class="bg-black relative text-center w-40 transition-all rounded-2xl py-3.5" :class="timerAlertStyle">
-
-        <div class="bg-futura-500 absolute border-futura-500 z-1 rounded-2xl top-0 left-0 h-full transition-all" :style="{width: timerWidthPercent, opacity: millisecondsToCount <= 4000 ? '0': '1'}"></div>
+    <div class="layout-timer bg-black relative text-center w-40 transition-all rounded-2xl py-3.5" :class="timerAlertStyle">
+        <div class="layout-timer__line z-1 rounded-2xl top-0 left-0 h-full transition-all" :style="{width: timerWidthPercent, opacity: millisecondsToCount <= 4000 ? '0': '1'}"></div>
         <div class="text-white text-2xl z-2 relative">{{ displayTimerValue }}</div>
     </div>
 </template>
@@ -48,5 +47,20 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+
+.smart {
+  .layout-timer {
+    &__line {
+      background-color: #4EAAFF;
+    }
+  }
+}
+
+.layout-timer {
+    &__line {
+      position: absolute;
+      background-color: #00CA14;
+    }
+  }
 
 </style>

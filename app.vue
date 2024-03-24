@@ -1,21 +1,11 @@
 <script setup>
 import LayoutHeader from './components/layout/header/layout-header.vue';
-
-const styleType = 'var1';
-
-const style = {
-  var1: {
-    class: 'smart',
-  },
-  var2: {
-    class: 'learn',
-  },
-};
+import { global } from './utils/style-directives';
 
 </script>
 
 <template>
-  <div class="global" :class="style[styleType].class">
+  <div class="global" :class="global.class">
     <LayoutHeader/>
     <div class="global__container">
       <NuxtPage />

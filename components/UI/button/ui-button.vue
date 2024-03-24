@@ -6,17 +6,17 @@
 
 <script setup>
 import { computed } from 'vue';
-import style from './style';
+import { button } from '../../../utils/style-directives.js';
 
 const props = defineProps({
   title: String,
   disabled: { type: Boolean, default: () => false },
-  bgColor: { type: String, default: () => style.bgColor },
-  borderColor: { type: String, default: (val) => (val?.bgColor || style.borderColor) },
-  textColor: { type: String, default: () => style.textColor },
+  bgColor: { type: String, default: () => button.bgColor },
+  borderColor: { type: String, default: (val) => (val?.bgColor || button.borderColor) },
+  textColor: { type: String, default: () => button.textColor },
   hoverEffect: {
     type: Object,
-    default: (val) => style.hoverEffect(val),
+    default: (val) => button.hoverEffect(val),
   },
   activeEffect: {
     type: Object,
